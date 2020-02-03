@@ -1,1 +1,1 @@
-docker container rm -f $(docker container ls -q)
+docker service rm $(docker service ls -q)

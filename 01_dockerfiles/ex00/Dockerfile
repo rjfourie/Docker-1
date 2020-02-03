@@ -1,0 +1,10 @@
+#GETTING ALPINE IMAGE
+FROM alpine
+
+RUN apk update && apk upgrade
+RUN apk add vim
+
+ENTRYPOINT ["vim"]
+
+# docker build -t ex00 .
+# docker run --rm -it ex00
