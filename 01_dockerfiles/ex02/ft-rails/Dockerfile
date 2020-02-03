@@ -1,10 +1,12 @@
-FROM ruby
-RUN apt-get update -y && apt-get install -y build-essential libpq-dev nodejs sqlite3
+FROM ruby:2.6
 
-ONBUILD COPY app /opt/app
-ONBUILD WORKDIR /opt/app
+RUN	gem install rails sqlite3 &&\
+	apt update &&\
+	apt install nodejs -y
 
+ONBUILD ADD	app /opt/app
+ONBUILD WORKDIR	/opt/app
 ONBUILD EXPOSE 3000
-ONBUILD RUN bundle install
-ONBUILD RUN rake db:migrate
-ONBUILD RUN rake db:seed
+ONBUILD RUN	bundle install
+ONBUILD RUN bundle exec rake db:migrate
+ONBUILD RUN bundle exec rake db:seed
